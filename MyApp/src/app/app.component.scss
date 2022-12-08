@@ -1,13 +1,5 @@
-.header {
-  position: absolute;
-  top: -18px;
-  left: 0;
-  right: 0;
-}
-
 .main {
-  margin-top: 100px;
-  padding: 28px 97px 51px;
+  padding: 28px 20px 51px;
   background-color: #D9D9D9;
 }
 
@@ -17,23 +9,25 @@
   height: 50px;
 }
 
-.nav__list {
-  list-style-type: none;
-  display: flex;
-  align-items: center;
-  gap: 47px;
-  background-color: #B3B3B3;
-  padding: 25px 97px;
-}
+.nav {
+  &__list{
+    list-style-type: none;
+    display: flex;
+    align-items: center;
+    gap: 47px;
+    background-color: #B3B3B3;
+    padding: 25px 20px;
+  }
 
-.nav__link {
-  text-decoration: none;
-  color: #000;
-}
+  &__link {
+    text-decoration: none;
+    color: #000;
+  }
 
-.nav__item:first-child {
-  background-color: #D9D9D9;
-  border-radius: 50%;
+  &__item:first-child {
+    background-color: #D9D9D9;
+    border-radius: 50%;
+  }
 }
 
 .card {
@@ -49,7 +43,7 @@
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
-    padding: 10px 25px 25px;
+    padding: 10px 10px 10px;
     background-color: #B3B3B3;
   }
 
@@ -73,15 +67,32 @@
   &__load{
     margin: 52px auto 0px;
     padding: 10px 25px;
-
   }
+
   &__admin{
     margin-top: 40px;
     background-color: #D9D9D9;
+    margin-bottom: auto;
+  }
+}
+
+.section {
+  &__title {
+    padding-bottom: 20px;
   }
 }
 
 @media only screen and (min-width: 768px) {
+  .main {
+    padding: 28px 45px 51px;
+  }
+
+  .nav {
+    &__list {
+      padding: 25px 45px;
+    }
+  }
+
   .card {
     &__list {
       grid-template-columns: 1fr 1fr 1fr;
@@ -90,9 +101,22 @@
 }
 
 @media only screen and (min-width: 980px) {
+  .nav{
+    &__list {
+      padding: 25px 97px;
+    }
+  }
+
+  .main {
+    padding: 28px 97px 51px;
+  }
+
   .card {
     &__list {
       grid-template-columns: 1fr 1fr 1fr 1fr;
+    }
+    &__item {
+      padding: 10px 20px 15px;
     }
   }
 }

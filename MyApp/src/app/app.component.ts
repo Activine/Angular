@@ -13,18 +13,18 @@ interface Data {
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  title = 'Study App';
+  title: string = 'Study App';
+  carArr: Array<string> = ['Kia', 'Nissan', 'Mitsubishi', 'Toyota', 'Daewoo', 'Citroen', 'Mazda', 'Renault'];
+  conditionArr: Array<string> = ['БУ (вложений не требует)', 'Новая (с автосалона)', 'На запчасти', 'После ДТП', 'Не растаможена'];
+  dataArr: Array<Data> = this.generationArr(this.carArr, this.conditionArr);
 
-  carArr: Array<string> = ['Kia', 'Nissan', 'Mitsubishi', 'Toyota', 'Daewoo', 'Citroen', 'Mazda', 'Renault']
-  conditionArr: Array<string> = ['БУ (вложений не требует)', 'Новая (с автосалона)', 'На запчасти', 'После ДТП', 'Не растаможена']
-
-  getRandomInt(min: number, max: number) {
+  getRandomInt(min: number, max: number): number {
     min = Math.ceil(min);
     max = Math.floor(max);
     return Math.floor(Math.random() * (max - min)) + min;
   }
 
-  generationArr(name: Array<string>, value: Array<string>) {
+  generationArr(name: Array<string>, value: Array<string>): Array<Data> {
     return name.map((el: string, i: number) => {
       return {
         id: uuidv4(),
@@ -33,6 +33,4 @@ export class AppComponent {
       }
     })
   }
-
-  dataArr: Array<Data> = this.generationArr(this.carArr, this.conditionArr)
 }

@@ -1,33 +1,33 @@
-<header ngClass="header">
-  <div ngClass="container">
-    <nav ngClass="nav">
-      <ul ngClass="nav__list">
-        <li ngClass="nav__item">
-          <a ngClass="nav__link logo" href="#"></a>
+<header class="header">
+  <div class="container">
+    <nav class="nav">
+      <ul class="nav__list">
+        <li class="nav__item">
+          <a class="nav__link logo" href="#"></a>
         </li>
-        <li ngClass="nav__item">
-          <a ngClass="nav__link" href="#">Products</a>
+        <li class="nav__item">
+          <a class="nav__link" href="#">Products</a>
         </li>
-        <li ngClass="nav__item">
-          <a ngClass="nav__link" href="#">Cart</a>
+        <li class="nav__item">
+          <a class="nav__link" href="#">Cart</a>
         </li>
       </ul>
     </nav>
   </div>
 </header>
-<main ngClass="main">
+<main class="main">
   <section>
     <div class="container">
-      <h2>Products</h2>
-      <ul ngClass="card__list">
-        <li ngClass="card__item" *ngFor="let el of dataArr">
+      <h2 class="section__title">Products</h2>
+      <ul class="card__list">
+        <li class="card__item" *ngFor="let el of dataArr">
           <p>{{el.name}}</p>
-          <p ngClass="card__price">{{el.price | currency}}</p>
-          <button ngClass="btn__card btn">Add to cart</button>
+          <p class="card__price">{{el.price | currency}}</p>
+          <button class="btn__card btn">Add to cart</button>
         </li>
       </ul>
-      <button ngClass="btn__load btn">Load more</button>
-      <button ngClass="btn__admin btn">Admin -></button>
+      <button class="btn__load btn">Load more</button>
+      <button class="btn__admin btn">Admin -></button>
     </div>
   </section>
 </main>
