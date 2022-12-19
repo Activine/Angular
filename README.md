@@ -1,2 +1,2 @@
 # Angular
-Study appcd
+Study app
