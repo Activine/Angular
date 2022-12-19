@@ -6,15 +6,14 @@ import { generationProducts } from '../products.service';
   selector: 'app-product-list',
   templateUrl: './product-list.component.html',
   styleUrls: ['./product-list.component.scss'],
-  providers: [generationProducts]
 })
 export class ProductListComponent implements OnInit {
 
   constructor(private generationProducts: generationProducts) { }
 
-  products: Array<Product> = []
+  products: Array<Product>
 
   ngOnInit(): void {
-    this.products = this.generationProducts.getRandomData()
+    this.products = this.generationProducts.getArr()
   }
 }

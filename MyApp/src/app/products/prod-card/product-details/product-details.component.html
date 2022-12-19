@@ -1,1 +1,7 @@
-<p>123</p>
+<div>
+  <h2>Products > {{ themeProduct.name }} #{{ themeProduct.id }}</h2>
+  <h1>{{ themeProduct.name }}</h1>
+  <h4>Description</h4>
+  <h2>Price: {{ themeProduct.price | uaCurrency }}</h2>
+  <button (click)="addToCart()"></button>
+</div>

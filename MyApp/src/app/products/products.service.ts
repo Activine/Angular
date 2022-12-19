@@ -10,7 +10,7 @@ export class generationProducts {
 
   carArr: Array<string> = ['Kia', 'Nissan', 'Mitsubishi', 'Toyota', 'Daewoo', 'Citroen', 'Mazda', 'Renault'];
   conditionArr: Array<string> = ['БУ (вложений не требует)', 'Новая (с автосалона)', 'На запчасти', 'После ДТП', 'Не растаможена'];
-  dataArr: Array<Product> = [];
+  public dataArr: Array<Product>;
 
   getRandomInt(min: number, max: number): number {
     min = Math.ceil(min);
@@ -29,10 +29,17 @@ export class generationProducts {
   }
 
   getRandomData() {
-    return this.dataArr = this.generationArr(this.carArr, this.conditionArr);
+    this.dataArr = this.generationArr(this.carArr, this.conditionArr);
+    console.log(this.dataArr);
+    return this.dataArr
   }
 
-  getProductTheme(id: string){
+  getArr() {
+    console.log(this.dataArr);
+    return this.dataArr;
+  }
+
+  getProductTheme(id: string): Product | undefined {
     return this.dataArr.find(product => product.id == id)
   }
 }
