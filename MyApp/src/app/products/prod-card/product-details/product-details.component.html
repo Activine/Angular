@@ -1,7 +1,14 @@
-<div>
-  <h2>Products > {{ themeProduct.name }} #{{ themeProduct.id }}</h2>
-  <h1>{{ themeProduct.name }}</h1>
-  <h4>Description</h4>
-  <h2>Price: {{ themeProduct.price | uaCurrency }}</h2>
-  <button (click)="addToCart()"></button>
+<div class="item">
+  <h4 class="item__route">
+    Products > {{ themeProduct.name }} #{{ themeProduct.id }}
+  </h4>
+  <h3 class="item__name">{{ themeProduct.name }}</h3>
+  <p class="item__desc">
+    Description: Lorem ipsum dolor sit amet consectetur adipisicing elit. Hic
+    repellendus, quam quis ea repellat perferendis aliquam cupiditate odio
+    nostrum delectus, ipsam libero magni officia maiores distinctio! Aspernatur
+    suscipit velit error!
+  </p>
+  <p class="item__price">Price: {{ themeProduct.price | uaCurrency }}</p>
+  <button class="item__cart" (click)="addToCart()">Add to Cart</button>
 </div>
