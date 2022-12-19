@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Router, ActivatedRoute, Params } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { generationProducts } from '../../products.service';
 
 @Component({
@@ -29,8 +29,9 @@ export class ProductDetailsComponent implements OnInit {
     })
 
     this.themeProduct = this.serverServive.getProductTheme(idProduct)
-    let data = this.serverServive.getArr()
-    console.log(this.themeProduct);
-    console.log(data);
+  }
+
+  goBack() {
+    this.router.navigate(['/products'], { relativeTo: this.activatedRoute });
   }
 }

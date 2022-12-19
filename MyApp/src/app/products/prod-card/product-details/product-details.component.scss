@@ -17,11 +17,15 @@
   &__price {
     padding-bottom: 15px;
   }
-
-  &__cart {
-    padding: 10px 15px;
-  }
 }
+.btn-cart {
+  margin-right: 30px;
+}
+.btn-cart, .btn-back {
+  padding: 10px 15px;
+  margin-bottom: 20px;
+}
+
 
 @media only screen and (min-width: 768px) {
   .item {
