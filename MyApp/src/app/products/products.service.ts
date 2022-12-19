@@ -31,4 +31,8 @@ export class generationProducts {
   getRandomData() {
     return this.dataArr = this.generationArr(this.carArr, this.conditionArr);
   }
+
+  getProductTheme(id: string){
+    return this.dataArr.find(product => product.id == id)
+  }
 }

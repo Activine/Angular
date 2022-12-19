@@ -7,6 +7,8 @@ import { HeaderComponent } from './header/header.component';
 import { ProdCardComponent } from './prod-card/prod-card.component';
 import { UaCurrencyPipe } from './pipes/ua-currency.pipes';
 import { ColorDirective } from './directive/color.directive';
+import { ProductDetailsComponent } from './prod-card/product-details/product-details.component';
+import { ProductListComponent } from './product-list/product-list.component';
 
 @NgModule({
   declarations: [
@@ -15,6 +17,8 @@ import { ColorDirective } from './directive/color.directive';
     ProdCardComponent,
     UaCurrencyPipe,
     ColorDirective,
+    ProductDetailsComponent,
+    ProductListComponent,
   ],
   imports: [
     CommonModule,

@@ -1,0 +1,12 @@
+<main class="main">
+  <section>
+    <div class="container">
+      <h2>Products</h2>
+      <ul class="card__list">
+        <app-prod-card class="card__item" *ngFor="let product of products" [product]="product"></app-prod-card>
+      </ul>
+      <button class="btn__load btn">Load more</button>
+      <button class="btn__admin btn">Admin -></button>
+    </div>
+  </section>
+</main>
