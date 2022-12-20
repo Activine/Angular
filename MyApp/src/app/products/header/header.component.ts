@@ -16,6 +16,10 @@ export class HeaderComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  goToCart() {
+    this.router.navigate(['/products/cart'], { relativeTo: this.activatedRoute });
+  }
+
   goBack() {
     this.router.navigate(['/products'], { relativeTo: this.activatedRoute });
   }

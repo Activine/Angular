@@ -1,0 +1,7 @@
+<div>
+  <app-cart-item
+    *ngFor="let product of products"
+    [product]="product"
+    (deleteClick)="hi()"
+  ></app-cart-item>
+</div>

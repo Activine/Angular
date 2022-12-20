@@ -18,7 +18,11 @@ export class ProductDetailsComponent implements OnInit {
   themeProduct: any
 
   addToCart() {
-    console.log('hi');
+    let idProduct: any;
+    this.activatedRoute.params.forEach(param => {
+      idProduct = param['id'];
+    })
+    console.log(this.themeProduct = this.serverServive.getProductTheme(idProduct));
   }
 
   ngOnInit(): void {

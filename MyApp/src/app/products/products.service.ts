@@ -30,7 +30,6 @@ export class generationProducts {
 
   getRandomData() {
     this.dataArr = this.generationArr(this.carArr, this.conditionArr);
-    console.log(this.dataArr);
     return this.dataArr
   }
 

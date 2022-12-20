@@ -1,5 +1,5 @@
 <li>
     <a [routerLink]="[product.id]">{{ product.name }}</a>
     <p class="card__price" [price]="product.price">{{ product.price | uaCurrency }}</p>
-    <button class="btn__card btn">Add to cart</button>
+    <button (click)="addToCart()" class="btn__card btn">Add to cart</button>
 </li>
