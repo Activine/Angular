@@ -1,0 +1,13 @@
+.card {
+  &__price {
+    margin-top: auto;
+  }
+}
+
+.btn{
+  &__card{
+    margin-top: 10px;
+    display: block;
+    padding: 10px 15px;
+  }
+}
