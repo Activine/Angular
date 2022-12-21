@@ -1,7 +1,10 @@
-<div>
+<div class="cart">
   <app-cart-item
     *ngFor="let product of products"
     [product]="product"
     (deleteClick)="delete(product)"
   ></app-cart-item>
+  <div>
+    <p class="price"> Total price: <span class="price-value">{{price | uaCurrency}}</span></p>
+  </div>
 </div>

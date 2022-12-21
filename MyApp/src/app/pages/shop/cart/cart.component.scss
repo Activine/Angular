@@ -1,0 +1,26 @@
+.cart {
+  background-color: #D9D9D9;
+  min-height: 450px;
+}
+
+.price {
+  display: flex;
+  justify-content: right;
+  margin-right: 150px;
+}
+
+.price-value {
+  padding-left: 10px;
+}
+
+@media only screen and (min-width: 768px) {
+  .cart {
+    padding: 25px 45px;
+  }
+}
+
+@media only screen and (min-width: 980px) {
+  .cart{
+    padding: 25px 97px;
+  }
+}

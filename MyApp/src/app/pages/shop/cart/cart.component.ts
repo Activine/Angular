@@ -12,24 +12,28 @@ export class CartComponent implements OnInit {
 
   constructor(private cartService: CartService) { }
 
-  products: Array<Product>
+  products: Array<Product>;
+  price: number = 0;
 
   delete(prod: Product) {
     this.cartService.deleteItem(prod)
     this.updateData()
+    this.calculatePrice()
     console.log(prod);
   }
 
-  hi() {
-    console.log('hi');
+  calculatePrice() {
+    return this.price = this.products.reduce((acc: number, item: Product) => acc += item.price, 0)
   }
 
   ngOnInit(): void {
-    this.products = this.cartService.getCart()
+    this.products = this.cartService.getCart();
+    this.calculatePrice()
   }
 
   updateData() {
     this.products = this.cartService.getCart();
-    // this.totalPrice = this.calcPrice();
   }
+
+
 }

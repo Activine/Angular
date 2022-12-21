@@ -21,7 +21,12 @@ export class CartService {
     return this.cartArr
   }
 
-  deleteItem(prod:Product) {
-    this.cartArr = this.cartArr.filter((el:Product) => el.id !== prod.id)
+  deleteItem(product:Product) {
+    this.cartArr = this.cartArr.filter((el:Product) => el.id !== product.id)
+    console.log(this.cartArr);
+  }
+
+  indexItem(product: Product) {
+    return this.cartArr.indexOf(product)
   }
 }
