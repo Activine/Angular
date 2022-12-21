@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { OnInit } from '@angular/core';
-import { generationProducts } from './products/products.service';
-import { Product } from './products/interface/products.interface';
+import { generationProducts } from './pages/shop/shared/services/products.service';
+import { Product } from './shared/interface/products.interface';
 
 @Component({
   selector: 'app-root',

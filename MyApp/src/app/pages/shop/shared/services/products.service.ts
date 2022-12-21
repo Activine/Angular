@@ -1,5 +1,5 @@
 import { Injectable } from "@angular/core";
-import { Product } from "./interface/products.interface";
+import { Product } from "../../../../shared/interface/products.interface";
 import { v4 as uuidv4 } from 'uuid';
 
 @Injectable({

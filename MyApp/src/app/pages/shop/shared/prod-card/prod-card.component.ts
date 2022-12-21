@@ -1,7 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { Product } from '../interface/products.interface';
+import { Product } from '../../../../shared/interface/products.interface';
 import { Router } from '@angular/router';
-import { CartService } from '../cart/cart.service';
+import { CartService } from '../services/cart.service';
 
 @Component({
   selector: 'app-prod-card',

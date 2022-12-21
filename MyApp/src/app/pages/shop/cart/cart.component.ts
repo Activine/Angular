@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { Product } from '../interface/products.interface';
-import { CartService } from './cart.service';
+import { Product } from '../../../shared/interface/products.interface';
+import { CartService } from '../shared/services/cart.service';
 
 
 @Component({
@@ -16,8 +16,10 @@ export class CartComponent implements OnInit {
 
   delete(prod: Product) {
     this.cartService.deleteItem(prod)
+    this.updateData()
     console.log(prod);
   }
+
   hi() {
     console.log('hi');
   }
@@ -26,4 +28,8 @@ export class CartComponent implements OnInit {
     this.products = this.cartService.getCart()
   }
 
+  updateData() {
+    this.products = this.cartService.getCart();
+    // this.totalPrice = this.calcPrice();
+  }
 }
