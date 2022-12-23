@@ -34,6 +34,4 @@ export class CartComponent implements OnInit {
   updateData() {
     this.products = this.cartService.getCart();
   }
-
-
 }

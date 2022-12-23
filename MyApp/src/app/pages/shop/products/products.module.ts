@@ -13,6 +13,7 @@ import { FooterComponent } from '../shared/footer/footer.component';
 import { CartComponent } from '../cart/cart.component';
 import { CartItemComponent } from '../shared/cart-item/cart-item.component';
 import { ButtonComponent } from '../shared/button/button.component';
+import { CartTooltipComponent } from '../shared/cart-tooltip/cart-tooltip.component';
 
 @NgModule({
   declarations: [
@@ -27,6 +28,7 @@ import { ButtonComponent } from '../shared/button/button.component';
     CartComponent,
     CartItemComponent,
     ButtonComponent,
+    CartTooltipComponent,
   ],
   imports: [
     CommonModule,

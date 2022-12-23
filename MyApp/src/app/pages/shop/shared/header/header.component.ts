@@ -12,12 +12,15 @@ export class HeaderComponent implements OnInit {
     private router: Router,
     private activatedRoute: ActivatedRoute,
   ) { }
+  public visible: boolean
+
 
   ngOnInit(): void {
   }
 
   goToCart() {
     this.router.navigate(['/products/cart'], { relativeTo: this.activatedRoute });
+    this.visible = false;
   }
 
   goBack() {
