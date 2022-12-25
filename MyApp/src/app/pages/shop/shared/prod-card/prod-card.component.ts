@@ -1,7 +1,7 @@
 import { Component, OnInit, Input, NgModule } from '@angular/core';
 import { Product } from '../../../../shared/interface/products.interface';
-import { Router } from '@angular/router';
 import { CartService } from '../services/cart.service';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-prod-card',
@@ -12,7 +12,8 @@ export class ProdCardComponent implements OnInit {
 
   constructor(
     private cartService: CartService,
-
+    private activatedRoute: ActivatedRoute,
+    private router: Router,
   ) { }
   description: string = 'Add to cart'
   @Input() product: Product;
@@ -39,6 +40,10 @@ export class ProdCardComponent implements OnInit {
       this.description = "Add to cart";
       return
     }
+  }
+
+  goToDetails() {
+    this.router.navigate(['/products/'+ this.product.id], { relativeTo: this.activatedRoute });
   }
 
   markerDescription() {

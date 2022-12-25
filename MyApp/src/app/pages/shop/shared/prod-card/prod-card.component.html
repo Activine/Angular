@@ -1,5 +1,5 @@
-<li>
-    <a [routerLink]="[product.id]">{{ product.name }}</a>
+<div>
+    <a class="card__link" (click)="goToDetails()">{{ product.name }}</a>
     <p class="card__price" [price]="product.price">{{ product.price | uaCurrency }}</p>
-    <app-button (click)="cartHandle(description)" [description]="description"></app-button>
-</li>
+    <app-button class="btn__card" (click)="cartHandle(description)" [description]="description"></app-button>
+</div>

@@ -19,8 +19,12 @@ export class HeaderComponent implements OnInit {
   }
 
   goToCart() {
-    this.router.navigate(['/products/cart'], { relativeTo: this.activatedRoute });
+    this.router.navigate(['/cart'], { relativeTo: this.activatedRoute });
     this.visible = false;
+  }
+
+  goHome() {
+    this.router.navigate([''], { relativeTo: this.activatedRoute });
   }
 
   goBack() {
