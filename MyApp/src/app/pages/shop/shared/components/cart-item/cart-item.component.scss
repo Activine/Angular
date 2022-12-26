@@ -1,0 +1,19 @@
+.product-item {
+  display: flex;
+  justify-content: space-between;
+  padding: 20px 30px 20px 10px;
+  border: 2px solid #000;
+  border-radius: 20px;
+  margin-bottom: 15px;
+  align-items: center;
+}
+
+.product-price {
+  margin-right: 30px;
+}
+
+.product-name {
+  margin-right: auto;
+
+}
+

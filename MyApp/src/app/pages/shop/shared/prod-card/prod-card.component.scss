@@ -1,12 +1,16 @@
 .card {
   &__price {
-    margin-top: auto;
+    margin-top: 10px;
+    margin-bottom: auto;
+  }
+  &__link {
+    cursor: pointer;
   }
 }
 
 .btn{
   &__card{
-    margin-top: 10px;
+
     display: block;
     padding: 10px 15px;
   }

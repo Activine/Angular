@@ -1,0 +1,8 @@
+<div class="home">
+  <h2 class="home__title">Welcome to the shop!</h2>
+  <h3 class="home__desc">Top our products:</h3>
+  <div class="top-list">
+    <app-prod-card class="top-item" *ngFor="let product of topProducts" [product]="product"></app-prod-card>
+  </div>
+  <button class="btn-home">See all list</button>
+</div>

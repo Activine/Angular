@@ -1,0 +1,5 @@
+<div class="product-item">
+  <h4 class="product-name">{{product.name}}</h4>
+  <p class="product-price">{{product.price | uaCurrency}}</p>
+  <app-button class="product-btn" (click)="deleteClick.emit()" description="Delete"></app-button>
+</div>

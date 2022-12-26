@@ -1,0 +1,24 @@
+.footer {
+  background-color: #B3B3B3;
+  padding: 25px 20px;
+}
+.btn{
+  &__admin{
+    background-color: #D9D9D9;
+    margin-bottom: auto;
+    padding: 10px 15px;
+    border-radius: 10px;
+  }
+}
+
+@media only screen and (min-width: 768px) {
+  .footer {
+    padding: 25px 45px;
+  }
+}
+
+@media only screen and (min-width: 980px) {
+  .footer{
+    padding: 25px 97px;
+  }
+}

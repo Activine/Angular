@@ -1,0 +1,13 @@
+<div class="cart">
+  <app-cart-item
+    *ngFor="let product of products"
+    [product]="product"
+    (deleteClick)="delete(product)"
+  ></app-cart-item>
+  <div *ngIf="!products.length">
+    <p>The cart is empty. Please choise product</p>
+  </div>
+  <div *ngIf="products.length">
+    <p class="price"> Total price: <span class="price-value">{{price | uaCurrency}}</span></p>
+  </div>
+</div>

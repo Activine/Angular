@@ -1,0 +1,40 @@
+.item {
+  padding: 25px 20px;
+
+  &__route{
+    padding-bottom: 25px;
+  }
+
+  &__name {
+    font-size: 34px;
+    padding-bottom: 15px;
+  }
+
+  &__desc {
+    padding-bottom: 15px;
+  }
+
+  &__price {
+    padding-bottom: 15px;
+  }
+}
+.btn-cart {
+  margin-right: 30px;
+}
+.btn-cart, .btn-back {
+  padding: 10px 15px;
+  margin-bottom: 20px;
+}
+
+
+@media only screen and (min-width: 768px) {
+  .item {
+    padding: 25px 45px;
+  }
+}
+
+@media only screen and (min-width: 980px) {
+  .item{
+    padding: 25px 97px;
+  }
+}
