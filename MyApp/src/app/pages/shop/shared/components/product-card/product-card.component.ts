@@ -14,21 +14,25 @@ export class ProductCardComponent implements OnInit {
     private cartService: CartService,
     private activatedRoute: ActivatedRoute,
     private router: Router,
-  ) { }
+  ) {
+    this.cartService.cart$.subscribe((res) => {
+      this.markerDescription();
+    })
+  }
   description: string = 'Add to cart'
   @Input() product: Product;
   @Input() toggle: Boolean = true;
 
   addToCart() {
     this.cartService.addToCart(this.product)
-    this.markerDescription()
-    this.cartService.cartArr$.subscribe(() => this.markerDescription())
+    // this.markerDescription()
+    // this.cartService.cartArr$.subscribe(() => this.markerDescription())
   }
 
   deleteFromCart() {
     this.cartService.deleteItem(this.product)
-    this.cartService.cartArr$.subscribe(() => this.markerDescription())
-    this.markerDescription()
+    // this.cartService.cartArr$.subscribe(() => this.markerDescription())
+    // this.markerDescription()
   }
 
   cartHandle() {
@@ -58,7 +62,7 @@ export class ProductCardComponent implements OnInit {
     }
 
     if (!this.cartService.getCart().some((el) => el.id === this.product.id)) {
-      console.log('2');
+      // console.log('2');
       this.description ='Add to cart';
       return;
     }

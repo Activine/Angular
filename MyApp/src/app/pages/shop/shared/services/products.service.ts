@@ -37,8 +37,8 @@ export class generationProducts {
   }
 
   getArr() {
-    console.log(this.dataArr);
-    console.log(this.myProducts$);
+    // console.log(this.dataArr);
+    // console.log(this.myProducts$);
 
     return this.dataArr;
   }
