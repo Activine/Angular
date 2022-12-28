@@ -9,26 +9,26 @@ import { Product } from 'src/app/shared/interface/products.interface';
 })
 export class CartTooltipComponent implements OnInit  {
 
-  constructor(private cartService: CartService) { }
-
-  ngOnInit (): void {
-    this.updateData()
-    this.calculatePrice()
-  }
-
   @Output() deleteClick = new EventEmitter();
   products: Array<Product>;
   price: number = 0;
 
+  constructor(private cartService: CartService) { }
+
+  ngOnInit (): void {
+    this.updateData()
+
+    this.calculatePrice()
+  }
+
   delete(prod: Product) {
     this.cartService.deleteItem(prod)
     this.updateData()
-    this.calculatePrice()
     console.log(prod);
   }
 
   calculatePrice() {
-    return this.price = this.products.reduce((acc: number, item: Product) => acc += item.price, 0)
+    return this.cartService.totalPrice$.subscribe((data) => this.price = data)
   }
 
   updateData() {

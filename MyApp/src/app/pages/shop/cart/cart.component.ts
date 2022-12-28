@@ -18,17 +18,18 @@ export class CartComponent implements OnInit {
   delete(prod: Product) {
     this.cartService.deleteItem(prod)
     this.updateData()
-    this.calculatePrice()
+    // this.calculatePrice()
     console.log(prod);
   }
 
   calculatePrice() {
-    return this.price = this.products.reduce((acc: number, item: Product) => acc += item.price, 0)
+    return this.cartService.totalPrice$.subscribe((data) => (this.price = data));
   }
 
   ngOnInit(): void {
     this.products = this.cartService.getCart();
     this.calculatePrice()
+    // this.cartService.totalPrice$.subscribe((data) => (this.price = data));
   }
 
   updateData() {

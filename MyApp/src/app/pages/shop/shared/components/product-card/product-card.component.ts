@@ -21,23 +21,27 @@ export class ProductCardComponent implements OnInit {
 
   addToCart() {
     this.cartService.addToCart(this.product)
-    this.toggle = !this.toggle
+    this.markerDescription()
+    this.cartService.cartArr$.subscribe(() => this.markerDescription())
   }
 
   deleteFromCart() {
     this.cartService.deleteItem(this.product)
-    this.toggle = !this.toggle
+    this.cartService.cartArr$.subscribe(() => this.markerDescription())
+    this.markerDescription()
   }
 
-  cartHandle(value: string) {
-    if (value === "Add to cart") {
+  cartHandle() {
+    if (!this.cartService.isInCart(this.product)) {
       this.addToCart()
-      this.description = "In cart";
+      // this.description = "In cart";
+      console.log('In cart');
       return
     }
-    if (value === "In cart") {
+    if (this.cartService.isInCart(this.product)) {
       this.deleteFromCart()
-      this.description = "Add to cart";
+      // this.description = "Add to cart";
+      console.log('Add to cart');
       return
     }
   }
@@ -47,17 +51,28 @@ export class ProductCardComponent implements OnInit {
   }
 
   markerDescription() {
-    if(this.cartService.indexItem(this.product) === -1) {
-      this.description = 'Add to cart'
-      return
+    if (this.cartService.getCart().some((el) => el.id === this.product.id)) {
+      console.log('1');
+      this.description = 'In cart';
+      return;
     }
-    if (this.cartService.indexItem(this.product) !== -1) {
-      this.description = "In cart"
-      return
+
+    if (!this.cartService.getCart().some((el) => el.id === this.product.id)) {
+      console.log('2');
+      this.description ='Add to cart';
+      return;
     }
+    // if(this.cartService.indexItem(this.product) === -1) {
+    //   this.description = 'Add to cart'
+    //   return
+    // }
+    // if (this.cartService.indexItem(this.product) !== -1) {
+    //   this.description = "In cart"
+    //   return
+    // }
   }
 
   ngOnInit(): void {
-    this.markerDescription()
+    // this.markerDescription()
   }
 }
