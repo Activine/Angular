@@ -1,49 +1,51 @@
 import { Injectable } from '@angular/core';
-import { Subject, BehaviorSubject } from 'rxjs';
+import { Subject, BehaviorSubject, Observable, map } from 'rxjs';
 import { Product } from '../../../../shared/interface/products.interface';
 import { generationProducts } from './products.service';
+
 
 @Injectable({
   providedIn: 'root',
 })
 export class CartService {
-  cartArr: Array<Product> = []
-  totalPrice$ = new BehaviorSubject<number>(0);
-  cartArr$ = new Subject<Product[]>();
+  private _cart$ = new BehaviorSubject<Product[]>([]);
+  public cart$: Observable<Product[]> = this._cart$.asObservable();
+
+  public totalPrice$: Observable<number> = this.cart$.pipe(
+    map((products: Product[]): number => {
+      return products.reduce((acc: number, product: Product): number => acc + product.price, 0);
+    })
+  )
 
   constructor(
     private productsService: generationProducts,
   ) {}
 
   addToCart(product: Product) {
-    this.cartArr.push(product)
-    console.log(this.cartArr);
-    // this.culculateTotalPrice()
+    this._cart$.next([
+      ...this._cart$.getValue(),
+      product
+    ])
   }
 
   getCart() {
-    this.culculateTotalPrice()
-    // console.log(this.cartArr$);
-    console.log(this.totalPrice$);
-    return this.cartArr
+    return this._cart$.getValue()
   }
 
   deleteItem(product:Product) {
-    this.cartArr = this.cartArr.filter((el:Product) => el.id !== product.id)
-    // this.culculateTotalPrice()
-    console.log(this.cartArr);
+    this._cart$.next([
+      ...this._cart$.getValue().filter((el:Product) => el.id !== product.id)
+    ])
   }
 
   indexItem(product: Product) {
-    return this.cartArr.indexOf(product)
+    // return this.cartArr.indexOf(product)
   }
 
   isInCart(product: Product): Product | undefined {
-    return this.cartArr.find((el: Product) => el.id === product.id)
+    return undefined
+    // return this.cartArr.find((el: Product) => el.id === product.id)
   }
 
-  culculateTotalPrice() {
-    this.totalPrice$.next(
-      this.cartArr.reduce((acc: number, value: Product) => (acc += value.price),0));
-  }
+
 }

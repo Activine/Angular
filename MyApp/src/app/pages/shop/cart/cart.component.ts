@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Observable } from 'rxjs';
 import { Product } from '../../../shared/interface/products.interface';
 import { CartService } from '../shared/services/cart.service';
 
@@ -8,31 +9,22 @@ import { CartService } from '../shared/services/cart.service';
   templateUrl: './cart.component.html',
   styleUrls: ['./cart.component.scss']
 })
-export class CartComponent implements OnInit {
+export class CartComponent {
 
   constructor(private cartService: CartService) { }
 
-  products: Array<Product>;
-  price: number = 0;
+  products$: Observable<Product[]> = this.cartService.cart$;
+  price$: Observable<number> = this.cartService.totalPrice$;
 
   delete(prod: Product) {
     this.cartService.deleteItem(prod)
-    this.updateData()
-    // this.calculatePrice()
-    console.log(prod);
   }
 
-  calculatePrice() {
-    return this.cartService.totalPrice$.subscribe((data) => (this.price = data));
-  }
+  // calculatePrice() {
+  //   return this.cartService.totalPrice$.subscribe((data) => (this.price = data));
+  // }
 
-  ngOnInit(): void {
-    this.products = this.cartService.getCart();
-    this.calculatePrice()
-    // this.cartService.totalPrice$.subscribe((data) => (this.price = data));
-  }
-
-  updateData() {
-    this.products = this.cartService.getCart();
-  }
+  // ngOnInit(): void {
+  //   this.calculatePrice()
+  // }
 }
