@@ -1,10 +1,10 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
-import { ShopRouteRoutingModule } from './shop-route-routing.module';
+import { ShopRouteRoutingModule } from './shop-routing.module';
 import { ShopComponent } from './shop.component';
 import { HeaderComponent } from './shared/components/header/header.component';
-import { ProdCardComponent } from './shared/prod-card/prod-card.component';
+import { ProductCardComponent } from './shared/components/product-card/product-card.component';
 import { UaCurrencyPipe } from '../../shared/pipes/ua-currency.pipes';
 import { ColorDirective } from './shared/directives/color.directive';
 import { ProductDetailsComponent } from './product-details/product-details.component';
@@ -20,7 +20,7 @@ import { HomePageComponent } from './home-page/home-page.component';
   declarations: [
     ShopComponent,
     HeaderComponent,
-    ProdCardComponent,
+    ProductCardComponent,
     UaCurrencyPipe,
     ColorDirective,
     ProductDetailsComponent,

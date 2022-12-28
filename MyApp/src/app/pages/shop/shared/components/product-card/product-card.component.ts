@@ -1,14 +1,14 @@
 import { Component, OnInit, Input, NgModule } from '@angular/core';
-import { Product } from '../../../../shared/interface/products.interface';
-import { CartService } from '../services/cart.service';
+import { Product } from '../../../../../shared/interface/products.interface';
+import { CartService } from '../../services/cart.service';
 import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-prod-card',
-  templateUrl: './prod-card.component.html',
-  styleUrls: ['./prod-card.component.scss']
+  templateUrl: './product-card.component.html',
+  styleUrls: ['./product-card.component.scss']
 })
-export class ProdCardComponent implements OnInit {
+export class ProductCardComponent implements OnInit {
 
   constructor(
     private cartService: CartService,
