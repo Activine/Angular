@@ -37,4 +37,4 @@ import { HomePageComponent } from './home-page/home-page.component';
     ShopRouteRoutingModule
   ]
 })
-export class ShopRouteModule { }
+export class ShopModule { }

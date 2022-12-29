@@ -1,0 +1,26 @@
+.products-title {
+  padding: 40px 25px 20px;
+  font-size: 24px;
+}
+
+.table {
+  padding-left: 25px;
+}
+
+.table-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.table-header{
+  display: flex;
+  justify-content: space-between;
+}
+
+.table-filter {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 15px;
+}
+
