@@ -10,6 +10,6 @@
     suscipit velit error!
   </p>
   <p class="item__price">Price: {{ themeProduct.price | uaCurrency }}</p>
-  <button class="btn-cart" (click)="addToCart()">Add to Cart</button>
+  <button class="btn-cart" (click)="cartHandle()">{{description}}</button>
   <button class="btn-back" (click)="goBack()">Go back</button>
 </div>

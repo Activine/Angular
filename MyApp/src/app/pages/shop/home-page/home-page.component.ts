@@ -11,7 +11,7 @@ export class HomePageComponent implements OnInit {
 
   constructor(private generationProducts: generationProducts) { }
 
-  products: Array<Product>
+  products: Array<Product> = this.generationProducts.getArr();
   topProducts: Array<Product>
 
   topThree() {
@@ -20,7 +20,6 @@ export class HomePageComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.products = this.generationProducts.getArr()
     this.topThree()
   }
 }

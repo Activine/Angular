@@ -17,10 +17,10 @@ export class ProductCardComponent implements OnInit {
   ) {
     this.cartService.cart$.subscribe((res: Product[]) => {
       console.log('markerDescription', {res});
-
-      this.markerDescription();
+      this.ngOnInit();
     })
   }
+
   description: string = 'Add to cart'
   @Input() product: Product;
   @Input() toggle: Boolean = true;
@@ -36,6 +36,7 @@ export class ProductCardComponent implements OnInit {
   cartHandle() {
     if (!this.cartService.isInCart(this.product)) {
       this.addToCart()
+      console.log(this.cartService.isInCart(this.product));
       return
     }
     if (this.cartService.isInCart(this.product)) {
@@ -49,28 +50,22 @@ export class ProductCardComponent implements OnInit {
   }
 
   markerDescription() {
+    console.log(this.cartService.getCart());
+
     if (this.cartService.getCart().some((el) => el.id === this.product.id)) {
-      console.log('1');
       this.description = 'In cart';
+      // console.log(this.product, this.description);
       return;
     }
 
     if (!this.cartService.getCart().some((el) => el.id === this.product.id)) {
-      console.log('2');
       this.description ='Add to cart';
+      // console.log(this.product, this.description);
       return;
     }
-    // if(this.cartService.indexItem(this.product) === -1) {
-    //   this.description = 'Add to cart'
-    //   return
-    // }
-    // if (this.cartService.indexItem(this.product) !== -1) {
-    //   this.description = "In cart"
-    //   return
-    // }
   }
 
-  ngOnInit(): void {
-    // this.markerDescription()
+  ngOnInit() {
+    this.markerDescription()
   }
 }

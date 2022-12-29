@@ -3,7 +3,6 @@ import { Subject, BehaviorSubject, Observable, map } from 'rxjs';
 import { Product } from '../../../../shared/interface/products.interface';
 import { generationProducts } from './products.service';
 
-
 @Injectable({
   providedIn: 'root',
 })
@@ -38,14 +37,8 @@ export class CartService {
     ])
   }
 
-  indexItem(product: Product) {
-    // return this.cartArr.indexOf(product)
+  isInCart(product: Product): any {
+    return this._cart$.getValue().find((el: Product) => el.id === product.id)
   }
-
-  isInCart(product: Product): Product | undefined {
-    return undefined
-    // return this.cartArr.find((el: Product) => el.id === product.id)
-  }
-
 
 }

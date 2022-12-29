@@ -20,11 +20,4 @@ export class CartComponent {
     this.cartService.deleteItem(prod)
   }
 
-  // calculatePrice() {
-  //   return this.cartService.totalPrice$.subscribe((data) => (this.price = data));
-  // }
-
-  // ngOnInit(): void {
-  //   this.calculatePrice()
-  // }
 }

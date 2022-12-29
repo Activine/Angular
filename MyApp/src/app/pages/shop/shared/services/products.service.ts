@@ -43,6 +43,11 @@ export class generationProducts {
   }
 
   getProductTheme(id: string): Product | undefined {
-    return this.dataArr.find(product => product.id == id)
+    console.log(id);
+
+    return this.dataArr.find(product => {
+      console.log(product.id == id);
+      return  product.id == id
+    })
   }
 }
