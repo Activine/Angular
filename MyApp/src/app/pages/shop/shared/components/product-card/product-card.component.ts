@@ -51,18 +51,21 @@ export class ProductCardComponent implements OnInit {
 
   markerDescription() {
     console.log(this.cartService.getCart());
-
-    if (this.cartService.getCart().some((el) => el.id === this.product.id)) {
-      this.description = 'In cart';
-      // console.log(this.product, this.description);
-      return;
+    if(!this.product) {
+      return
     }
+    return  this.description = this.cartService.isInCart(this.product) ? 'In cart' : 'Add to cart'
+    // if (this.cartService.getCart().some((el) => el.id === this.product.id)) {
+    //   this.description = 'In cart';
+    //   // console.log(this.product, this.description);
+    //   return;
+    // }
 
-    if (!this.cartService.getCart().some((el) => el.id === this.product.id)) {
-      this.description ='Add to cart';
-      // console.log(this.product, this.description);
-      return;
-    }
+    // if (!this.cartService.getCart().some((el) => el.id === this.product.id)) {
+    //   this.description ='Add to cart';
+    //   // console.log(this.product, this.description);
+    //   return;
+    // }
   }
 
   ngOnInit() {

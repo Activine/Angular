@@ -54,7 +54,6 @@ export class ProductDetailsComponent implements OnInit {
     }
   }
 
-
   ngOnInit(): void {
     let idProduct: any;
 
@@ -74,16 +73,10 @@ export class ProductDetailsComponent implements OnInit {
 
   markerDescription() {
     console.log(this.cartService.getCart());
-
-    if (this.cartService.getCart().some((el) => el.id === this.themeProduct.id)) {
-      this.description = 'In cart';
-      return;
+    if(!this.themeProduct) {
+      return
     }
-
-    if (!this.cartService.getCart().some((el) => el.id === this.themeProduct.id)) {
-      this.description ='Add to cart';
-      return;
-    }
+    return this.description = this.cartService.isInCart(this.themeProduct) ? 'In cart' : 'Add to cart'
   }
 
 }
