@@ -5,7 +5,6 @@ import { ShopRouteRoutingModule } from './shop-routing.module';
 import { ShopComponent } from './shop.component';
 import { HeaderComponent } from './shared/components/header/header.component';
 import { ProductCardComponent } from './shared/components/product-card/product-card.component';
-import { UaCurrencyPipe } from '../../shared/pipes/ua-currency.pipes';
 import { ColorDirective } from './shared/directives/color.directive';
 import { ProductDetailsComponent } from './product-details/product-details.component';
 import { ProductListComponent } from './product-list/product-list.component';
@@ -15,13 +14,13 @@ import { CartItemComponent } from './shared/components/cart-item/cart-item.compo
 import { ButtonComponent } from './shared/components/button/button.component';
 import { CartTooltipComponent } from './shared/components/cart-tooltip/cart-tooltip.component';
 import { HomePageComponent } from './home-page/home-page.component';
+import { SharedModule } from 'src/app/shared/shared.module';
 
 @NgModule({
   declarations: [
     ShopComponent,
     HeaderComponent,
     ProductCardComponent,
-    UaCurrencyPipe,
     ColorDirective,
     ProductDetailsComponent,
     ProductListComponent,
@@ -34,7 +33,8 @@ import { HomePageComponent } from './home-page/home-page.component';
   ],
   imports: [
     CommonModule,
-    ShopRouteRoutingModule
+    ShopRouteRoutingModule,
+    SharedModule
   ]
 })
 export class ShopModule { }
