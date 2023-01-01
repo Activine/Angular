@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { generationProducts } from '../shared/services/products.service';
 import { Product } from 'src/app/shared/interface/products.interface';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-home-page',
@@ -11,12 +12,18 @@ export class HomePageComponent implements OnInit {
 
   constructor(private generationProducts: generationProducts) { }
 
-  products: Array<Product> = this.generationProducts.getArr();
-  topProducts: Array<Product>
+  products: Observable<Product[]> = this.generationProducts.getArr();
+  topProducts: Product[]
 
   topThree() {
-    this.topProducts = [...this.products];
-    this.topProducts.sort((a: Product, b: Product) => a.price < b.price ? 1 : -1).splice(3)
+     this.generationProducts.getArr().subscribe((data) => {
+      this.topProducts = data.sort((a: Product, b: Product) => a.price < b.price ? 1 : -1).slice(0, 3)
+      console.log(this.topProducts);
+    })
+    // this.topProducts = this.generationProducts.getArr().pipe(
+    //   debounceTime(1000),
+    //   take(3)
+    // );
   }
 
   ngOnInit(): void {

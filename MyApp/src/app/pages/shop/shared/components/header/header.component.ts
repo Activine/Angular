@@ -12,10 +12,17 @@ export class HeaderComponent implements OnInit {
     private router: Router,
     private activatedRoute: ActivatedRoute,
   ) { }
-  public visible: boolean
-
+  public visible: boolean = false;
 
   ngOnInit(): void {
+  }
+
+  hover() {
+    this.visible = true
+  }
+
+  leave(){
+    this.visible = false
   }
 
   goToCart() {
@@ -25,9 +32,11 @@ export class HeaderComponent implements OnInit {
 
   goHome() {
     this.router.navigate([''], { relativeTo: this.activatedRoute });
+    this.visible = false;
   }
 
   goBack() {
     this.router.navigate(['/products'], { relativeTo: this.activatedRoute });
+    this.visible = false;
   }
 }

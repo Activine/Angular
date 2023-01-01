@@ -1,7 +1,7 @@
 import { Injectable } from "@angular/core";
 import { Product } from "../../../../shared/interface/products.interface";
 import { v4 as uuidv4 } from 'uuid';
-import { BehaviorSubject } from 'rxjs';
+import { BehaviorSubject, delay, Observable, of } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -36,10 +36,10 @@ export class generationProducts {
     return this.dataArr
   }
 
-  getArr() {
-    // console.log(this.dataArr);
-    // console.log(this.myProducts$);
-    return this.dataArr;
+  getArr(): Observable<Product[]> {
+    return of(this.dataArr).pipe(
+      delay(1000),
+    )
   }
 
   getProductTheme(id: string): Product | undefined {

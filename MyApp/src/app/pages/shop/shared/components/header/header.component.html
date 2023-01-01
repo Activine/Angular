@@ -1,18 +1,22 @@
 <header class="header">
     <div class="container">
       <nav class="nav">
-        <ul class="nav__list">
+        <ul class="nav__list" (mouseleave)="leave()">
           <li class="nav__item">
             <a class="nav__link logo" (click)="goHome()"></a>
           </li>
           <li class="nav__item">
             <a class="nav__link" (click)="goBack()">Products</a>
           </li>
-          <li class="nav__item" (mouseenter)="visible = !visible">
-            <a class="nav__link" (click)="goToCart()">Cart</a>
+          <li class="nav__item" (mouseenter)="hover()">
+            <a class="nav__link" [routerLink]="'cart'" (click)="leave()">Cart</a>
+            <app-cart-tooltip
+              *ngIf="visible"
+              (mouseleave)="leave()"
+              ></app-cart-tooltip>
           </li>
-          <app-cart-tooltip (mouseleave)="visible = !visible" *ngIf="visible"></app-cart-tooltip>
         </ul>
       </nav>
     </div>
   </header>
+

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Observable } from 'rxjs';
 import { Product } from 'src/app/shared/interface/products.interface';
 import { generationProducts } from '../../shop/shared/services/products.service';
 
@@ -12,7 +13,7 @@ export class ProductsComponent implements OnInit {
 
   constructor(private generationProducts: generationProducts) { }
 
-  products: Array<Product>
+  products: Observable<Product[]>
 
   ngOnInit(): void {
     this.products = this.generationProducts.getArr()
