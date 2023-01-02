@@ -3,7 +3,6 @@ import { Observable, tap } from 'rxjs';
 import { Product } from 'src/app/shared/interface/products.interface';
 import { generationProducts } from '../../shop/shared/services/products.service';
 
-
 @Component({
   selector: 'app-products',
   templateUrl: './products.component.html',
