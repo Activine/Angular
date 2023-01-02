@@ -41,6 +41,8 @@
       </div>
       <button class="add-product">Add</button>
     </div>
-    <app-product-item *ngFor="let product of products | async" [product]="product"></app-product-item>
+    <app-tables (handlePrice)="sortPrice()" (handleName)="sortName()" (handleID)="sortID()" [items]="products">
+      <!-- <app-product-item *ngFor="let product of products | async" [product]="product"></app-product-item> -->
+    </app-tables>
   </div>
 </div>

@@ -8,6 +8,7 @@ import { LoginComponent } from './login/login.component';
 import { UsersComponent } from './users/users.component';
 import { ProductItemComponent } from './shared/components/product-item/product-item.component';
 import { SharedModule } from 'src/app/shared/shared.module';
+import { TablesComponent } from './shared/components/tables/tables.component';
 
 @NgModule({
   declarations: [
@@ -17,6 +18,7 @@ import { SharedModule } from 'src/app/shared/shared.module';
     LoginComponent,
     UsersComponent,
     ProductItemComponent,
+    TablesComponent,
   ],
   imports: [
     CommonModule,

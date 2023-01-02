@@ -1,0 +1,16 @@
+<table>
+  <tr>
+    <th (click)="handleID.emit()">ID</th>
+    <th (click)="handleName.emit()">Name</th>
+    <th (click)="handlePrice.emit()">Price</th>
+  </tr>
+  <tr *ngFor="let product of items | async ">
+    <td>{{product.id}}</td>
+    <td>{{product.name}}</td>
+    <td>{{product.price | uaCurrency}}</td>
+    <td>
+      <button>1</button>
+      <button>2</button>
+    </td>
+  </tr>
+</table>
