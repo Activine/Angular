@@ -1,0 +1,46 @@
+<h3 class="products-title">Products</h3>
+<div class="table">
+  <div class="table-filter">
+    <input class="search" placeholder="Search...">
+    <div class="table-value">
+      <label for="value">More than:</label>
+      <select class="value">
+        <option value="100">100</option>
+        <option value="200">200</option>
+        <option value="300">300</option>
+      </select>
+    </div>
+    <input class="date" placeholder="10/10/2010">
+    <button class="apply">Apply</button>
+  </div>
+  <div class="table-list">
+    <div class="table-header">
+      <div class="table-id">
+        <label for="ID">ID:</label>
+        <select class="ID">
+          <option value="1">1</option>
+          <option value="2">2</option>
+          <option value="3">3</option>
+        </select>
+      </div>
+      <div class="table-name">
+        <label for="name">Name:</label>
+        <select class="name">
+          <option value="name1">name1</option>
+          <option value="name2">name2</option>
+          <option value="name3">name3</option>
+        </select>
+      </div>
+      <div class="table-price">
+        <label for="price">Price:</label>
+        <select class="price">
+          <option value="10">10</option>
+          <option value="20">20</option>
+          <option value="30">30</option>
+        </select>
+      </div>
+      <button class="add-product">Add</button>
+    </div>
+    <app-product-item *ngFor="let product of products | async" [product]="product"></app-product-item>
+  </div>
+</div>

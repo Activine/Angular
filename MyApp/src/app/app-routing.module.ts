@@ -2,15 +2,15 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
 const routes: Routes = [
-  // {
-  //   path: '',
-  //   redirectTo: 'shop',
-  //   pathMatch: 'full'
-  // },
   {
     path: '',
     loadChildren: () => import('./pages/shop/shop.module')
-      .then(m => m.ShopRouteModule)
+      .then(m => m.ShopModule)
+  },
+  {
+    path: 'administration',
+    loadChildren: () => import('./pages/administration/administration.module')
+      .then(m => m.AdministrationModule)
   }
 ];
 

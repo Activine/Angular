@@ -1,6 +1,7 @@
 import { Injectable } from "@angular/core";
 import { Product } from "../../../../shared/interface/products.interface";
 import { v4 as uuidv4 } from 'uuid';
+import { BehaviorSubject, delay, Observable, of } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -11,6 +12,7 @@ export class generationProducts {
   carArr: Array<string> = ['Kia', 'Nissan', 'Mitsubishi', 'Toyota', 'Daewoo', 'Citroen', 'Mazda', 'Renault'];
   conditionArr: Array<string> = ['БУ (вложений не требует)', 'Новая (с автосалона)', 'На запчасти', 'После ДТП', 'Не растаможена'];
   public dataArr: Array<Product>;
+  myProducts$ = new BehaviorSubject<Product[]>([]);
 
   getRandomInt(min: number, max: number): number {
     min = Math.ceil(min);
@@ -30,15 +32,22 @@ export class generationProducts {
 
   getRandomData() {
     this.dataArr = this.generationArr(this.carArr, this.conditionArr);
+    this.myProducts$.next(this.dataArr)
     return this.dataArr
   }
 
-  getArr() {
-    console.log(this.dataArr);
-    return this.dataArr;
+  getArr(): Observable<Product[]> {
+    return of(this.dataArr).pipe(
+      delay(1000),
+    )
   }
 
   getProductTheme(id: string): Product | undefined {
-    return this.dataArr.find(product => product.id == id)
+    console.log(id);
+
+    return this.dataArr.find(product => {
+      console.log(product.id == id);
+      return  product.id == id
+    })
   }
 }
