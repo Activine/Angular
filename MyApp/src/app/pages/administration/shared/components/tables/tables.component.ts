@@ -8,11 +8,14 @@ import { Product } from 'src/app/shared/interface/products.interface';
   styleUrls: ['./tables.component.scss']
 })
 export class TablesComponent implements OnInit {
-  @Input() items: Observable<Product[]>
+  @Input() items: any[] | null;
 
-  @Output() handlePrice = new EventEmitter();
+  @Output() handlePrice = new EventEmitter<string>();
   @Output() handleName = new EventEmitter();
   @Output() handleID = new EventEmitter();
+
+  priceSort: string = ''; // '' | 'asc' | 'desc'
+  nameSort: string = ''; // '' | 'asc' | 'desc'
 
   constructor() { }
 
@@ -21,15 +24,41 @@ export class TablesComponent implements OnInit {
 
   handleDelete(id:any) {
     console.log(id);
-    this.items.subscribe((data: any) =>
-        data.find((el: any) => {
-        el.id == id
-        console.log(el.id == id);
-        return el.id == id
-      })
-    );
+    // this.items.subscribe((data: any) =>
+    //     data.find((el: any) => {
+    //     el.id == id
+    //     console.log(el.id == id);
+    //     return el.id == id
+    //   })
+    // );
 
     // this.items.next()
+  }
+  onPriceSort() {
+    this.nameSort = '';
+
+    if(this.priceSort === '') {
+      this.priceSort = 'asc';
+    } else if(this.priceSort === 'asc') {
+      this.priceSort = 'desc';
+    } else {
+      this.priceSort = '';
+    }
+
+    this.handlePrice.emit(this.priceSort);
+  }
+  onNameSort() {
+    this.priceSort = '';
+
+    if(this.nameSort === '') {
+      this.nameSort = 'asc';
+    } else if(this.nameSort === 'asc') {
+      this.nameSort = 'desc';
+    } else {
+      this.nameSort = '';
+    }
+
+    this.handleName.emit(this.nameSort);
   }
 
 }

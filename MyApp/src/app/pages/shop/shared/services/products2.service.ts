@@ -17,8 +17,25 @@ export class TodosService {
     return this.http.post<ApiProduct>('https://jsonplaceholder.typicode.com/todos', todo)
   }
 
-  fetchTodos(): Observable<ApiProduct[]> {
-    return this.http.get<ApiProduct[]>('https://hys-fe-course-api.vercel.app/products?limit=10&page=1&sort=-price&filter=author;admin')
+  fetchTodos(
+    sort?: { fieldName: string; value: string } | null,
+  ): Observable<ApiProduct[]> {
+      // ?limit=10&page=1&sort=-price&filter=author;admin'
+
+
+    return this.http.get<ApiProduct[]>(
+      'https://hys-fe-course-api.vercel.app/products',
+      {
+        params: {
+          limit: 20,
+          page: 1,
+          filter: `author;actvine`,
+          ...sort && sort.value && {
+            sort: `${sort.value === 'asc' ? '' : '-'}${sort.fieldName}` // sort: '-price'
+          }
+        }
+      }
+    )
   }
 
   removeTodo(id: number): Observable<void> {

@@ -22,8 +22,17 @@
     <div class="table-header">
       <button class="add-product">Add</button>
     </div>
-    <app-tables (handlePrice)="sortPrice()" (handleName)="sortName()" (handleID)="sortID()" [items]="items">
+    <app-tables
+      (handlePrice)="sortPrice($event)"
+      (handleName)="sortName($event)"
+      (handleID)="sortID()"
+      [items]="items$ | async"
+    >
       <!-- <app-product-item *ngFor="let product of products | async" [product]="product"></app-product-item> -->
     </app-tables>
+
+<!--    <div>-->
+<!--      Subject (stream): {{ sorting$ | async | json}}-->
+<!--    </div>-->
   </div>
 </div>

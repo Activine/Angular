@@ -1,5 +1,16 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
-import { debounceTime, filter, fromEvent, map, Observable, tap } from 'rxjs';
+import {
+  BehaviorSubject,
+  combineLatest,
+  debounceTime,
+  filter,
+  forkJoin,
+  fromEvent,
+  map,
+  merge,
+  Observable, of, startWith, switchMap,
+  tap
+} from 'rxjs';
 import { ApiProduct, Product } from 'src/app/shared/interface/products.interface';
 import { generationProducts } from '../../shop/shared/services/products.service';
 import { FilterService } from '../../shop/shared/services/filter.service';
@@ -7,6 +18,7 @@ import { TodosService } from '../../shop/shared/services/products2.service';
 // import { Todo, TodosService } from '../../shop/shared/services/products2.service';
 // import {MatDialogModule} from '@angular/material/dialog';
 
+type Sorting = { fieldName: string, value: string } | null;
 
 @Component({
   selector: 'app-products',
@@ -20,9 +32,10 @@ export class ProductsComponent implements OnInit {
     private todosService: TodosService
   ) { }
 
-  items: Observable<ApiProduct[]> = this.todosService.fetchTodos()
+  items$: Observable<ApiProduct[]>;
 
-  products: Observable<Product[]>
+  products: ApiProduct[];
+  // products: Observable<Product[]>
   priceSort: boolean = false;
   nameSort: boolean = false;
   IDSort: boolean = false;
@@ -31,56 +44,146 @@ export class ProductsComponent implements OnInit {
   password: number
   val: string
 
+  sort$: BehaviorSubject<Sorting> =
+    new BehaviorSubject<Sorting>(null);
+
+  sortName$: BehaviorSubject<Sorting> =
+    new BehaviorSubject<Sorting>(null);
+  search$: BehaviorSubject<string> =
+    new BehaviorSubject<string>('');
+
+  sorting$: Observable<[Sorting, Sorting, string]> = combineLatest([
+    this.sort$,
+    this.sortName$,
+    this.search$
+  ]);
+
 
   ngOnInit(): void {
-    this.products = this.generationProducts.getArr()
+    // this.products = this.generationProducts.getArr();
+
+    // 1
+    // this.sort$.subscribe((res)=>{
+    //   this.items$ = this.todosService.fetchTodos(res);
+    // });
+    // this.sortName$.subscribe((res)=>{
+    //   this.items$ = this.todosService.fetchTodos(res);
+    // });
+
+
+    //2
+    this.items$ =
+      combineLatest([
+        this.sort$,
+        this.sortName$,
+        this.search$
+      ])
+      .pipe(
+        switchMap((
+          [sort, sortName, search]: [Sorting, Sorting, string],
+        ): Observable<ApiProduct[]> => {
+          console.log(search, 777);
+          return this.todosService.fetchTodos(sort).pipe(
+            map((prods: ApiProduct[]): ApiProduct[] => {
+              let res = prods;
+
+              if(search) {
+                res = prods.filter((prod: ApiProduct): boolean => {
+                  return prod.name.toLowerCase().includes(search) ||
+                   prod.price.toString().toLowerCase().includes(search);
+                })
+              }
+
+              return res;
+            })
+          );
+        }),
+      );
+
+
+
+    // 3 (sorting on FE)
+    // this.todosService.fetchTodos(null).subscribe((res)=> {
+    //   this.products = res;
+    //
+    //   this.items$ =
+    //     combineLatest([
+    //       this.sort$,
+    //       this.sortName$,
+    //     ])
+    //       .pipe(
+    //         switchMap((
+    //           [sort, sortName]: [Sorting, Sorting],
+    //         ): Observable<ApiProduct[]> => {
+    //           console.log([sort?.fieldName], 777);
+    //           // return this.todosService.fetchTodos(sort);
+    //           return of(this.products).pipe(
+    //             startWith(this.products),
+    //             map((prods) => {
+    //               return prods && prods.sort();
+    //             })
+    //           );
+    //         }),
+    //       );
+    // });
   }
 
-  sortPrice() {
-    console.log(1);
-    if (this.priceSort) {
-      this.items.subscribe((data) => {
-        console.log(data);
-        data.sort((a: ApiProduct, b: ApiProduct) => a.price < b.price ? 1 : -1)
-      })
-      this.priceSort = false;
-      console.log(2);
-      return
-    }
-    if (!this.priceSort) {
-      this.items.subscribe((data) => {
-        console.log(data);
-        data.sort((a: ApiProduct, b: ApiProduct) => {
-          console.log(a.price < b.price);
-          return a.price > b.price ? 1 : -1
-        });
-      })
-      console.log(3);
-      this.priceSort = true;
-      return
-    }
+  sortPrice(event: string): void {
+    console.log({event}, 7777);
+
+    this.sort$.next({
+      fieldName: 'price',
+      value: event
+    });
+
+
+    // if (this.priceSort) {
+    //   this.items$.subscribe((data) => {
+    //     console.log(data);
+    //     data.sort((a: ApiProduct, b: ApiProduct) => a.price < b.price ? 1 : -1)
+    //   })
+    //   this.priceSort = false;
+    //   console.log(2);
+    //   return
+    // }
+    // if (!this.priceSort) {
+    //   this.items$.subscribe((data) => {
+    //     console.log(data);
+    //     data.sort((a: ApiProduct, b: ApiProduct) => {
+    //       console.log(a.price < b.price);
+    //       return a.price > b.price ? 1 : -1
+    //     });
+    //   })
+    //   console.log(3);
+    //   this.priceSort = true;
+    //   return
+    // }
   }
 
-  sortName() {
-    if (this.nameSort) {
-      this.generationProducts.getArr().subscribe((data) => {
-        data.sort((a: Product, b: Product) => a.name < b.name ? 1 : -1)
-      })
-      this.nameSort = false;
-      return
-    }
-    if (!this.nameSort) {
-      this.generationProducts.getArr().subscribe((data) => {
-        data.sort((a: Product, b: Product) => a.name > b.name ? 1 : -1)
-      })
-      this.nameSort = true;
-      return
-    }
+  sortName(event: string) {
+    this.sort$.next({
+      fieldName: 'name',
+      value: event
+    });
+    // if (this.nameSort) {
+    //   this.generationProducts.getArr().subscribe((data) => {
+    //     data.sort((a: Product, b: Product) => a.name < b.name ? 1 : -1)
+    //   })
+    //   this.nameSort = false;
+    //   return
+    // }
+    // if (!this.nameSort) {
+    //   this.generationProducts.getArr().subscribe((data) => {
+    //     data.sort((a: Product, b: Product) => a.name > b.name ? 1 : -1)
+    //   })
+    //   this.nameSort = true;
+    //   return
+    // }
   }
 
   sortID() {
     if (this.IDSort) {
-      this.items.subscribe((data) => {
+      this.items$.subscribe((data) => {
         data.sort((a: ApiProduct, b: ApiProduct) => a.id < b.id ? 1 : -1)
         console.log(data);
 
@@ -89,7 +192,7 @@ export class ProductsComponent implements OnInit {
       return
     }
     if (!this.IDSort) {
-      this.items.subscribe((data) => {
+      this.items$.subscribe((data) => {
         data.sort((a: ApiProduct, b: ApiProduct) => a.id > b.id ? 1 : -1)
         console.log(data);
 
@@ -111,10 +214,10 @@ export class ProductsComponent implements OnInit {
 
   ngAfterViewInit() {
     // fromEvent(this.priceInput.nativeElement, 'input')
-    // .pipe(
-    //   debounceTime(1000),
-    //   map((event: any) => console.log(event.target.value))
-    // )
+    //   .pipe(
+    //     debounceTime(1000),
+    //     map((event: any) => this.search$.next(event))
+    //   )
 
     if (this.priceInput) {
       fromEvent(this.priceInput.nativeElement, 'input')
@@ -132,14 +235,20 @@ export class ProductsComponent implements OnInit {
     fromEvent(this.searchInput.nativeElement, 'input')
       .pipe(
         debounceTime(1000),
-        map((event: any) => event.target.value)
-      )
-      .subscribe((data) => {
-        this.configService.setSearch(data)
-        console.log(data);
-      });
+        map((event: any) => this.search$.next(event.target.value))
+      ).subscribe();
   }
   clickApply() {
+    // this.apply$.next({
+    //   search: this.searchInput,
+    //   priceFilter: {
+    //     op: 'greater',
+    //     val: this.priceInput
+    //   }
+    // })
+
+
+
       // fromEvent(this.priceInput.nativeElement, 'input')
       //   .pipe(
       //     debounceTime(1000),
