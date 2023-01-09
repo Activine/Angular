@@ -1,3 +1,28 @@
+.table {
+  width: 100%;
+}
+
 th {
+  cursor: pointer;
+
+}
+
+
+td {
+  border: 1px solid black;
+  padding: 5px;
+}
+
+.wrap-index {
+text-align: center;
+}
+
+.wrap-btns {
+  display: flex;
+  justify-content: space-around;
+}
+.wrap-btns button {
+  padding: 5px 20px;
+  border-radius: 10px;
   cursor: pointer;
 }

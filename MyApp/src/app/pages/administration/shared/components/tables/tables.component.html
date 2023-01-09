@@ -1,16 +1,24 @@
-<table>
+<table class="table">
   <tr>
     <th (click)="handleID.emit()">ID</th>
-    <th (click)="handleName.emit()">Name</th>
-    <th (click)="handlePrice.emit()">Price</th>
+    <th (click)="onNameSort()">
+      Name
+      <span *ngIf="nameSort">({{nameSort}})</span>
+    </th>
+    <th (click)="onPriceSort()">Price
+      <span *ngIf="priceSort">{{priceSort}}</span>
+    </th>
   </tr>
-  <tr *ngFor="let product of items | async ">
-    <td>{{product.id}}</td>
-    <td>{{product.name}}</td>
-    <td>{{product.price | uaCurrency}}</td>
-    <td>
-      <button>edit</button>
-      <button>delete</button>
-    </td>
-  </tr>
+
+  <ng-container *ngIf="items">
+    <tr *ngFor="let product of items let i = index">
+      <td class="wrap-index">{{i + 1}}</td>
+      <td>{{product.name}}</td>
+      <td>{{product.price | uaCurrency}}</td>
+      <td class="wrap-btns">
+        <button>edit</button>
+        <button>delete</button>
+      </td>
+    </tr>
+  </ng-container>
 </table>

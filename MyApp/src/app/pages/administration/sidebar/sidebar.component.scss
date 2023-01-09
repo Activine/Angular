@@ -5,7 +5,7 @@
   padding: 25px 20px;
   background-color: #B3B3B3;
   min-height: 700px;
-
+  height: 100vh;
 }
 
 .sidebar-list {
@@ -39,9 +39,10 @@
   text-decoration: none;
   color: #000;
   background-color: #D9D9D9;
-  padding: 10px 15px;
+  padding: 10px 10px;
   border-radius: 10px;
   border: 2px solid #000;
+  width: 95px;
 }
 
 @media only screen and (min-width: 768px) {
@@ -52,6 +53,6 @@
 
 @media only screen and (min-width: 980px) {
   .sidebar{
-    padding: 25px 97px;
+    padding: 25px 0px 25px 97px ;
   }
 }

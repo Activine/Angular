@@ -1,5 +1,7 @@
 .wrapper {
-  display: flex;
+  width: 100%;
+  display: grid;
+  grid-template-columns: 20% 0% 80%;
   background-color: #D9D9D9;;
 }
 
