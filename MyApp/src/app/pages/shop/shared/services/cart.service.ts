@@ -40,5 +40,4 @@ export class CartService {
   isInCart(product: Product): any {
     return this._cart$.getValue().find((el: Product) => el.id === product.id)
   }
-
 }

@@ -9,6 +9,11 @@ import { UsersComponent } from './users/users.component';
 import { ProductItemComponent } from './shared/components/product-item/product-item.component';
 import { SharedModule } from 'src/app/shared/shared.module';
 import { TablesComponent } from './shared/components/tables/tables.component';
+import { MatSelectModule } from '@angular/material/select';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { FormsModule } from '@angular/forms'
+
 
 @NgModule({
   declarations: [
@@ -23,7 +28,12 @@ import { TablesComponent } from './shared/components/tables/tables.component';
   imports: [
     CommonModule,
     AdministrationRoutingModule,
-    SharedModule
+    SharedModule,
+    MatSelectModule,
+    MatFormFieldModule,
+    MatInputModule,
+    FormsModule,
+
   ]
 })
 export class AdministrationModule { }
