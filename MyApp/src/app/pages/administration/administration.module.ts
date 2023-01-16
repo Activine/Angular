@@ -12,7 +12,11 @@ import { TablesComponent } from './shared/components/tables/tables.component';
 import { MatSelectModule } from '@angular/material/select';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
-import { FormsModule } from '@angular/forms'
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { MatButtonModule } from '@angular/material/button';
+import { AuthService } from './shared/services/auth.service';
+import { AuthGuard } from './shared/services/auth.guard';
+
 
 
 @NgModule({
@@ -33,7 +37,12 @@ import { FormsModule } from '@angular/forms'
     MatFormFieldModule,
     MatInputModule,
     FormsModule,
-
+    ReactiveFormsModule,
+    MatButtonModule
+  ],
+  providers: [
+    AuthService,
+    AuthGuard
   ]
 })
 export class AdministrationModule { }

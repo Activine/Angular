@@ -13,6 +13,7 @@ export class TablesComponent implements OnInit {
   @Output() handlePrice = new EventEmitter<string>();
   @Output() handleName = new EventEmitter();
   @Output() handleID = new EventEmitter();
+  @Output() handleDelete = new EventEmitter();
 
   priceSort: string = ''; // '' | 'asc' | 'desc'
   nameSort: string = ''; // '' | 'asc' | 'desc'
@@ -22,8 +23,8 @@ export class TablesComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  handleDelete(id:any) {
-    console.log(id);
+  Delete(id:any) {
+    // console.log(id);
     // this.items.subscribe((data: any) =>
     //     data.find((el: any) => {
     //     el.id == id
@@ -33,27 +34,30 @@ export class TablesComponent implements OnInit {
     // );
 
     // this.items.next()
+    this.handleDelete.emit(id);
   }
+
   onPriceSort() {
     this.nameSort = '';
 
     if(this.priceSort === '') {
-      this.priceSort = 'asc';
-    } else if(this.priceSort === 'asc') {
-      this.priceSort = 'desc';
+      this.priceSort = '▼';
+    } else if(this.priceSort === '▼') {
+      this.priceSort = '▲';
     } else {
       this.priceSort = '';
     }
 
     this.handlePrice.emit(this.priceSort);
   }
+
   onNameSort() {
     this.priceSort = '';
 
     if(this.nameSort === '') {
-      this.nameSort = 'asc';
-    } else if(this.nameSort === 'asc') {
-      this.nameSort = 'desc';
+      this.nameSort = '▼';
+    } else if(this.nameSort === '▼') {
+      this.nameSort = '▲';
     } else {
       this.nameSort = '';
     }

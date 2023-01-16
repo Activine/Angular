@@ -20,8 +20,6 @@ export class TodosService {
   fetchTodos(
     sort?: { fieldName: string; value: string } | null,
   ): Observable<ApiProduct[]> {
-      // ?limit=10&page=1&sort=-price&filter=author;admin'
-
 
     return this.http.get<ApiProduct[]>(
       'https://hys-fe-course-api.vercel.app/products',
@@ -29,17 +27,23 @@ export class TodosService {
         params: {
           limit: 20,
           page: 1,
-          filter: `author;actvine`,
+          filter: `author;${localStorage.getItem('username')}`,
           ...sort && sort.value && {
-            sort: `${sort.value === 'asc' ? '' : '-'}${sort.fieldName}` // sort: '-price'
+            sort: `${sort.value === '▲' ? '' : '-'}${sort.fieldName}` // sort: '-price'
           }
         }
       }
     )
   }
 
-  removeTodo(id: number): Observable<void> {
-    return this.http.delete<void>(`https://jsonplaceholder.typicode.com/todos/${id}`)
+  removeTodo(id: string): Observable<void> {
+    console.log(id);
+
+    return this.http.delete<void>(`https://hys-fe-course-api.vercel.app/products/${id}`, {
+      headers: {
+        Authorization: `${localStorage.getItem('token')}`
+      }
+    })
   }
 
   completeTodo(id: number): Observable<ApiProduct> {

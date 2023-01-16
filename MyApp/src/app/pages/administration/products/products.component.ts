@@ -15,8 +15,6 @@ import { ApiProduct, Product } from 'src/app/shared/interface/products.interface
 import { generationProducts } from '../../shop/shared/services/products.service';
 import { FilterService } from '../../shop/shared/services/filter.service';
 import { TodosService } from '../../shop/shared/services/products2.service';
-// import { Todo, TodosService } from '../../shop/shared/services/products2.service';
-// import {MatDialogModule} from '@angular/material/dialog';
 
 type Sorting = { fieldName: string, value: string } | null;
 
@@ -49,6 +47,7 @@ export class ProductsComponent implements OnInit {
 
   sortName$: BehaviorSubject<Sorting> =
     new BehaviorSubject<Sorting>(null);
+
   search$: BehaviorSubject<string> =
     new BehaviorSubject<string>('');
 
@@ -135,29 +134,6 @@ export class ProductsComponent implements OnInit {
       fieldName: 'price',
       value: event
     });
-
-
-    // if (this.priceSort) {
-    //   this.items$.subscribe((data) => {
-    //     console.log(data);
-    //     data.sort((a: ApiProduct, b: ApiProduct) => a.price < b.price ? 1 : -1)
-    //   })
-    //   this.priceSort = false;
-    //   console.log(2);
-    //   return
-    // }
-    // if (!this.priceSort) {
-    //   this.items$.subscribe((data) => {
-    //     console.log(data);
-    //     data.sort((a: ApiProduct, b: ApiProduct) => {
-    //       console.log(a.price < b.price);
-    //       return a.price > b.price ? 1 : -1
-    //     });
-    //   })
-    //   console.log(3);
-    //   this.priceSort = true;
-    //   return
-    // }
   }
 
   sortName(event: string) {
@@ -165,20 +141,11 @@ export class ProductsComponent implements OnInit {
       fieldName: 'name',
       value: event
     });
-    // if (this.nameSort) {
-    //   this.generationProducts.getArr().subscribe((data) => {
-    //     data.sort((a: Product, b: Product) => a.name < b.name ? 1 : -1)
-    //   })
-    //   this.nameSort = false;
-    //   return
-    // }
-    // if (!this.nameSort) {
-    //   this.generationProducts.getArr().subscribe((data) => {
-    //     data.sort((a: Product, b: Product) => a.name > b.name ? 1 : -1)
-    //   })
-    //   this.nameSort = true;
-    //   return
-    // }
+  }
+
+  delete(event: string) {
+    // console.log(event);
+    this.todosService.removeTodo(event)
   }
 
   sortID() {
@@ -204,21 +171,9 @@ export class ProductsComponent implements OnInit {
 
   setSelect(event: any) {
     console.log(this.val);
-
-    // if (!event.value) {
-    //   this.configService.setSelect('');
-    // } else {
-    //   this.configService.setSelect(event.value);
-    // }
   }
 
   ngAfterViewInit() {
-    // fromEvent(this.priceInput.nativeElement, 'input')
-    //   .pipe(
-    //     debounceTime(1000),
-    //     map((event: any) => this.search$.next(event))
-    //   )
-
     if (this.priceInput) {
       fromEvent(this.priceInput.nativeElement, 'input')
         .pipe(
@@ -226,9 +181,7 @@ export class ProductsComponent implements OnInit {
           map((event: any) => event.target.value)
         )
         .subscribe((data) => {
-          // this.configService.setPrice(+data)
           console.log(+data);
-
         });
     }
 
@@ -238,26 +191,8 @@ export class ProductsComponent implements OnInit {
         map((event: any) => this.search$.next(event.target.value))
       ).subscribe();
   }
+
   clickApply() {
-    // this.apply$.next({
-    //   search: this.searchInput,
-    //   priceFilter: {
-    //     op: 'greater',
-    //     val: this.priceInput
-    //   }
-    // })
-
-
-
-      // fromEvent(this.priceInput.nativeElement, 'input')
-      //   .pipe(
-      //     debounceTime(1000),
-      //     map((event: any) => event.target.value)
-      //   )
-      //   .subscribe((data) => {
-      //     // this.configService.setPrice(+data)
-      //     console.log(+data);
-      //   });
     console.log(this.password);
     if (!this.password || !this.val) {
       console.log('input or checkbox is empty')
@@ -269,20 +204,7 @@ export class ProductsComponent implements OnInit {
           console.log(el.price > this.password);
           el.price > this.password
         })
-        // console.log(this.arr);
-
       })
-
-      // .subscribe((data) => {
-      //   data.filter((el: Product) => {
-      //     console.log(el.price);
-      //     console.log(this.password);
-
-      //     el.price > this.password
-
-      //   })
-        // data.sort((a: Product, b: Product) => a.price < b.price ? 1 : -1)
-      // })
     }
-    }
+  }
 }

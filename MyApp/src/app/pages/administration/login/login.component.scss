@@ -3,3 +3,48 @@
   font-size: 24px;
   padding-left: 25px;
 }
+
+.example-form {
+  min-width: 150px;
+  max-width: 300px;
+  width: 100%;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: silver;
+  border-radius: 15px;
+  padding: 15px;
+}
+
+.example-full-width {
+  width: 100%;
+}
+
+.form {
+  min-width: 150px;
+  max-width: 300px;
+  width: 100%;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: silver;
+  border-radius: 15px;
+  padding: 15px;
+}
+
+input {
+  padding: 10px;
+  border-radius: 15px;
+}
+
+label {
+  padding: 10px;
+}
+
+button {
+  margin-top: 20px;
+  padding: 10px 20px;
+  border-radius: 15px;
+}

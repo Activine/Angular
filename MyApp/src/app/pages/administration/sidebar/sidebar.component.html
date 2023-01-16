@@ -3,7 +3,8 @@
     <li><a class="sidebar-link logo" routerLink="" routerLinkActive="active"></a></li>
     <li><a class="sidebar-link" routerLink="/administration/users" routerLinkActive="active">Users</a></li>
     <li><a class="sidebar-link" routerLink="/administration/products" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">Products</a></li>
-    <li><a class="sidebar-link" routerLink="/administration/logout" routerLinkActive="active">Log out</a></li>
+    <li><a class="sidebar-link" routerLink="/administration/login" routerLinkActive="active">Login</a></li>
+    <li><button class="sidebar-link btn-logout" type="button" (click)="HandleLogout()">Logout</button></li>
   </ul>
   <a class="go-shop" routerLink="/products">Shop -></a>
 </div>

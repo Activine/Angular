@@ -5,32 +5,40 @@ import { AdministrationComponent } from './administration.component';
 import { ProductsComponent } from './products/products.component';
 import { UsersComponent } from './users/users.component';
 import { LoginComponent } from './login/login.component';
+import { AuthGuard } from './shared/services/auth.guard';
 
 
 const routes: Routes = [
-  {
-    path: '',
-    pathMatch: 'full',
-    redirectTo: 'products',
-  },
+  // {
+  //   path: '',
+  //   pathMatch: 'full',
+  //   redirectTo: 'products',
+  // },
   {
     path: '',
     component: AdministrationComponent,
     children: [
       {
+        path: '',
+        pathMatch: 'full',
+        redirectTo: 'login'
+      },
+      {
+        path: 'login',
+        pathMatch: 'full',
+        component: LoginComponent,
+      },
+      {
         path: 'products',
         pathMatch: 'full',
         component: ProductsComponent,
+        canActivate: [AuthGuard]
       },
       {
         path: 'users',
         pathMatch:'full',
         component: UsersComponent,
-      },
-      {
-        path: 'logout',
-        pathMatch: 'full',
-        component: LoginComponent,
+        canActivate: [AuthGuard]
       }
     ]
   }

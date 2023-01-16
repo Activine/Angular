@@ -26,6 +26,7 @@
       (handlePrice)="sortPrice($event)"
       (handleName)="sortName($event)"
       (handleID)="sortID()"
+      (handleDelete)="delete($event)"
       [items]="items$ | async"
     >
       <!-- <app-product-item *ngFor="let product of products | async" [product]="product"></app-product-item> -->
