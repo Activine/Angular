@@ -15,6 +15,8 @@ import { ApiProduct, Product } from 'src/app/shared/interface/products.interface
 import { generationProducts } from '../../shop/shared/services/products.service';
 import { FilterService } from '../../shop/shared/services/filter.service';
 import { TodosService } from '../../shop/shared/services/products2.service';
+import { MatDialog } from '@angular/material/dialog';
+import { ProductModalComponent } from '../product-modal/product-modal.component';
 
 type Sorting = { fieldName: string, value: string } | null;
 
@@ -27,7 +29,8 @@ export class ProductsComponent implements OnInit {
   constructor(
     private generationProducts: generationProducts,
     private configService: FilterService,
-    private todosService: TodosService
+    private todosService: TodosService,
+    private dialog: MatDialog
   ) { }
 
   items$: Observable<ApiProduct[]>;
@@ -57,6 +60,37 @@ export class ProductsComponent implements OnInit {
     this.search$
   ]);
 
+  showModalAdd: boolean = false
+
+  initData() {
+    this.items$ =
+    combineLatest([
+      this.sort$,
+      this.sortName$,
+      this.search$
+    ])
+    .pipe(
+      switchMap((
+        [sort, sortName, search]: [Sorting, Sorting, string],
+      ): Observable<ApiProduct[]> => {
+        console.log(search, 777);
+        return this.todosService.fetchTodos(sort).pipe(
+          map((prods: ApiProduct[]): ApiProduct[] => {
+            let res = prods;
+
+            if(search) {
+              res = prods.filter((prod: ApiProduct): boolean => {
+                return prod.name.toLowerCase().includes(search) ||
+                 prod.price.toString().toLowerCase().includes(search);
+              })
+            }
+
+            return res;
+          })
+        );
+      }),
+    );
+  }
 
   ngOnInit(): void {
     // this.products = this.generationProducts.getArr();
@@ -71,33 +105,37 @@ export class ProductsComponent implements OnInit {
 
 
     //2
-    this.items$ =
-      combineLatest([
-        this.sort$,
-        this.sortName$,
-        this.search$
-      ])
-      .pipe(
-        switchMap((
-          [sort, sortName, search]: [Sorting, Sorting, string],
-        ): Observable<ApiProduct[]> => {
-          console.log(search, 777);
-          return this.todosService.fetchTodos(sort).pipe(
-            map((prods: ApiProduct[]): ApiProduct[] => {
-              let res = prods;
+    this.initData()
+    console.log(1);
 
-              if(search) {
-                res = prods.filter((prod: ApiProduct): boolean => {
-                  return prod.name.toLowerCase().includes(search) ||
-                   prod.price.toString().toLowerCase().includes(search);
-                })
-              }
 
-              return res;
-            })
-          );
-        }),
-      );
+    // this.items$ =
+    //   combineLatest([
+    //     this.sort$,
+    //     this.sortName$,
+    //     this.search$
+    //   ])
+    //   .pipe(
+    //     switchMap((
+    //       [sort, sortName, search]: [Sorting, Sorting, string],
+    //     ): Observable<ApiProduct[]> => {
+    //       console.log(search, 777);
+    //       return this.todosService.fetchTodos(sort).pipe(
+    //         map((prods: ApiProduct[]): ApiProduct[] => {
+    //           let res = prods;
+
+    //           if(search) {
+    //             res = prods.filter((prod: ApiProduct): boolean => {
+    //               return prod.name.toLowerCase().includes(search) ||
+    //                prod.price.toString().toLowerCase().includes(search);
+    //             })
+    //           }
+
+    //           return res;
+    //         })
+    //       );
+    //     }),
+    //   );
 
 
 
@@ -136,6 +174,13 @@ export class ProductsComponent implements OnInit {
     });
   }
 
+  showModal() {
+    this.dialog.open(ProductModalComponent, {
+      height: '500px',
+      width: '300px'
+    })
+  }
+
   sortName(event: string) {
     this.sort$.next({
       fieldName: 'name',
@@ -144,8 +189,11 @@ export class ProductsComponent implements OnInit {
   }
 
   delete(event: string) {
-    // console.log(event);
-    this.todosService.removeTodo(event)
+    this.todosService.removeTodo(event).subscribe(() => this.initData())
+  }
+
+  handleAdd() {
+    this.showModalAdd = !this.showModalAdd
   }
 
   sortID() {

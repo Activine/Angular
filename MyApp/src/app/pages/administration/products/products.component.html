@@ -18,7 +18,7 @@
     </mat-form-field>
     <button (click)="clickApply()" class="apply">Apply</button> -->
     <div class="table-header">
-      <button class="add-product">Add</button>
+      <button class="add-product" (click)="showModal()">Add</button>
     </div>
   </div>
   <div class="table-list">
@@ -37,3 +37,4 @@
 <!--    </div>-->
   </div>
 </div>
+<!-- <app-product-modal *ngIf="showModalAdd" (handleClose)="showModal()"></app-product-modal> -->

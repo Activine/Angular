@@ -16,6 +16,9 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { AuthService } from './shared/services/auth.service';
 import { AuthGuard } from './shared/services/auth.guard';
+import { ProductModalComponent } from './product-modal/product-modal.component';
+import {MatDialogModule} from '@angular/material/dialog';
+
 
 
 
@@ -28,6 +31,7 @@ import { AuthGuard } from './shared/services/auth.guard';
     UsersComponent,
     ProductItemComponent,
     TablesComponent,
+    ProductModalComponent,
   ],
   imports: [
     CommonModule,
@@ -38,7 +42,8 @@ import { AuthGuard } from './shared/services/auth.guard';
     MatInputModule,
     FormsModule,
     ReactiveFormsModule,
-    MatButtonModule
+    MatButtonModule,
+    MatDialogModule
   ],
   providers: [
     AuthService,

@@ -1,0 +1,59 @@
+<div>
+  <div>
+    <p>My modal</p>
+    <button (click)="close()">x</button>
+  </div>
+</div>
+
+<form [formGroup]="form" (ngSubmit)="submit()" class="form">
+  <div
+    class="form-control"
+    [ngClass]="{
+      invalid: form.get('name')?.touched && form.get('name')?.invalid
+    }"
+  >
+    <label for="name">Name:</label>
+    <input type="text" id="name" formControlName="name" placeholder="Admin"/>
+    <div
+      *ngIf="form.get('name')?.touched && form.get('name')?.invalid"
+      class="validation"
+    >
+      <!-- <small *ngIf="form.get('email').errors">wrxetcyvbuinomp</small> -->
+      <!-- <small *ngIf="form.get('email').errors.email">wrxetcyvbuinomp</small> -->
+    </div>
+  </div>
+
+  <div
+    class="form-control"
+    [ngClass]="{
+      invalid: form.get('price')?.touched && form.get('price')?.invalid
+    }"
+  >
+    <label for="price">Price:</label>
+    <input class="" type="text" id="price" formControlName="price" placeholder="123456"/>
+    <div
+      *ngIf="form.get('price')?.touched && form.get('price')?.invalid"
+      class="validation"
+    >
+      <small *ngIf="form.get('price')?.errors">can't be empty</small>
+    </div>
+  </div>
+
+  <div
+  class="form-control"
+  [ngClass]="{
+    invalid: form.get('description')?.touched && form.get('description')?.invalid
+  }"
+>
+  <label for="description">About:</label>
+  <input class="" type="text" id="description" formControlName="description" placeholder="123456"/>
+  <div
+    *ngIf="form.get('description')?.touched && form.get('description')?.invalid"
+    class="validation"
+  >
+    <small *ngIf="form.get('description')?.errors">can't be empty</small>
+  </div>
+</div>
+
+  <button type="submit" [disabled]="form.invalid" >Create</button>
+</form>

@@ -13,8 +13,17 @@ export class TodosService {
 
   public dataArr: Array<ApiProduct>;
 
-  addTodo(todo: ApiProduct): Observable<ApiProduct> {
-    return this.http.post<ApiProduct>('https://jsonplaceholder.typicode.com/todos', todo)
+  addTodo(todo: any): Observable<any> {
+    console.log('todo', JSON.stringify(todo));
+    console.log('token',  localStorage.getItem('token'));
+
+    return this.http.post<any>('https://hys-fe-course-api.vercel.app/products', {
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem('token')}`
+      },
+      // body: JSON.stringify(todo)
+    })
+
   }
 
   fetchTodos(
@@ -41,7 +50,7 @@ export class TodosService {
 
     return this.http.delete<void>(`https://hys-fe-course-api.vercel.app/products/${id}`, {
       headers: {
-        Authorization: `${localStorage.getItem('token')}`
+        Authorization: `Bearer ${localStorage.getItem('token')}`
       }
     })
   }
