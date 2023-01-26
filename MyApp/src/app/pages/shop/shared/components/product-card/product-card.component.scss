@@ -1,16 +1,21 @@
 .card {
   &__price {
-    margin-top: 10px;
-    margin-bottom: auto;
+    // margin-top: 10px;
+    margin-top: auto;
   }
   &__link {
     cursor: pointer;
+    margin-bottom: 15px;
+    font-size: 24px;
+    line-height: normal;
   }
 }
 
 .btn{
   &__card{
-    display: inline-block;
-    padding: 10px 15px;
+    // margin-top: auto;
+    padding-top: 15px;
+    // display: inline-block;
+    // padding: 10px 15px;
   }
 }

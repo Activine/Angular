@@ -30,6 +30,9 @@
   width: 220px;
   background-color: #B3B3B3;
   padding: 10px 10px 10px;
+  display: flex;
+  flex-direction: column;
+  border-radius: 10px;
 }
 
 .btn-home {

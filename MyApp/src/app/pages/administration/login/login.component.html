@@ -1,1 +1,48 @@
-<h3 class="login-title">Login please</h3>
+<!-- <form class="example-form">
+  <mat-form-field class="example-full-width">
+    <mat-label for="login">Login:</mat-label>
+    <input id="login" type="text" matInput placeholder="Ololo">
+  </mat-form-field>
+  <mat-form-field class="example-full-width">
+    <mat-label for="password">Password:</mat-label>
+    <input id="password" type="number" matInput placeholder="12345">
+  </mat-form-field>
+  <button type="submit" mat-raised-button color="primary">Login</button>
+</form> -->
+<form [formGroup]="form" (ngSubmit)="submit()" class="form">
+  <div
+    class="form-control"
+    [ngClass]="{
+      invalid: form.get('email')?.touched && form.get('email')?.invalid
+    }"
+  >
+    <label for="email">Login:</label>
+    <input type="text" id="email" formControlName="username" placeholder="Admin"/>
+    <div
+      *ngIf="form.get('email')?.touched && form.get('email')?.invalid"
+      class="validation"
+    >
+      <!-- <small *ngIf="form.get('email').errors">wrxetcyvbuinomp</small> -->
+      <!-- <small *ngIf="form.get('email').errors.email">wrxetcyvbuinomp</small> -->
+    </div>
+  </div>
+
+  <div
+    class="form-control"
+    [ngClass]="{
+      invalid: form.get('password')?.touched && form.get('password')?.invalid
+    }"
+  >
+    <label for="password">Password:</label>
+    <input class="" type="password" id="password" formControlName="password" placeholder="123456"/>
+    <div
+      *ngIf="form.get('password')?.touched && form.get('password')?.invalid"
+      class="validation"
+    >
+      <small *ngIf="form.get('password')?.errors">can't be empty</small>
+    </div>
+  </div>
+
+  <button type="submit" [disabled]="form.invalid" (click)="showProd()">Login</button>
+</form>
+<!-- [disabled]="form.invalid" -->
